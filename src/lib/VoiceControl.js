@@ -19,9 +19,9 @@ export default class VoiceControl {
 	constructor(commandPrefix) {
 		this.commandPrefix = commandPrefix.toUpperCase() || 'CHICKEN HANDS';
 
-		this.readytolisten = true;
-
 		this.onlisteningchange = event => event;
+
+		this.fireListeningChange(true);
 
 		this.commandPrefixLastIndex = this.commandPrefix.split(' ').length;
 
