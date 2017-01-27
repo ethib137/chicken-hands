@@ -61,7 +61,7 @@ class Timer extends Component {
 
 		var timeLeft = (time - (timeRemainder)) / INT_SIXTY;
 
-		timeRight = this.padDisplayTime_(timeRemainder);
+		var timeRight = this.padDisplayTime_(timeRemainder);
 
 		return timeLeft + ':' + timeRight;
 	}
