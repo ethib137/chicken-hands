@@ -3,40 +3,35 @@ import getCN from 'classnames';
 
 import {otherProps} from './lib/util';
 
-class Input extends Component {
+class Textarea extends Component {
 	render() {
 		const {
 			placeholder,
-			type,
+			rows,
 			value
 		} = this.props;
 
 		const classes = getCN(
 			'form-control',
-			'input-container'
+			'textarea-container'
 		);
 
 		return (
-			<input
+			<textarea
 				{...otherProps(this)}
 				class={classes}
 				placeholder={placeholder}
-				type={type}
+				rows={rows}
 				value={value}
 			/>
 		);
 	}
 }
 
-Input.PROPS = {
+Textarea.PROPS = {
 	placeholder: Config.string(),
-	type: Config.string().value('text'),
-	value: Config.oneOf(
-		[
-			Config.number(),
-			Config.string()
-		]
-	)
+	rows: Config.number().value(3),
+	value: Config.string()
 };
 
-export default Input;
+export default Textarea;
