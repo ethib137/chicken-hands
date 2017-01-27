@@ -1,7 +1,7 @@
 import Component, {Config} from 'metal-jsx';
 import getCN from 'classnames';
 
-import {otherProps} from '../lib/metal-util';
+import {otherProps} from './lib/util';
 
 class Button extends Component {
 	render() {

@@ -1,7 +1,7 @@
 import Component, {Config} from 'metal-jsx';
 import getCN from 'classnames';
 
-import {otherProps} from './lib/util';
+import {otherProps} from '../lib/metal-util';
 
 class Input extends Component {
 	render() {
