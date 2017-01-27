@@ -4,6 +4,12 @@
 		font-size: 32px;
 	}
 
+	.listening-state {
+		bottom: 8px;
+		left: 8px;
+		position: fixed;
+	}
+
 	.step-counter {
 		align-items: center;
 		display: flex;

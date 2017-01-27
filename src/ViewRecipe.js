@@ -67,9 +67,9 @@ class ViewRecipe extends Component {
 									<div class="step-label">{`Step ${currentStep + 1} of ${recipe.steps.length}`}</div>
 								</div>
 
-								<div>{this.state.readyToListen_ ? 'Ready to listen' : 'Processing command...'}</div>
 							</div>
 
+							<div class="listening-state">{this.state.readyToListen_ ? 'Ready to listen' : 'Processing command...'}</div>
 						</div>
 				}
 			</div>
