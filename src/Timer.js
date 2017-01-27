@@ -50,18 +50,18 @@ class Timer extends Component {
 	}
 
 	padDisplayTime_(val) {
-		var str = '' + val;
-		var pad = '00';
+		const str = '' + val;
+		const pad = '00';
 
 		return pad.substring(0, pad.length - str.length) + str;
 	}
 
 	setDisplayTime_(time) {
-		var timeRemainder = time % INT_SIXTY;
+		const timeRemainder = time % INT_SIXTY;
 
-		var timeLeft = (time - (timeRemainder)) / INT_SIXTY;
+		const timeLeft = (time - (timeRemainder)) / INT_SIXTY;
 
-		var timeRight = this.padDisplayTime_(timeRemainder);
+		const timeRight = this.padDisplayTime_(timeRemainder);
 
 		return timeLeft + ':' + timeRight;
 	}
@@ -72,10 +72,10 @@ class Timer extends Component {
 			name
 		} = this.props;
 
-		var displayTime;
+		let displayTime;
 
-		var seconds = this.state.currentTime_ / INT_SEC;
-		var minutes = (seconds - (seconds % INT_SIXTY)) / INT_SIXTY;
+		const seconds = this.state.currentTime_ / INT_SEC;
+		const minutes = (seconds - (seconds % INT_SIXTY)) / INT_SIXTY;
 
 		if (minutes > 59) {
 			displayTime = this.setDisplayTime_(minutes);
