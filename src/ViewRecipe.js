@@ -15,6 +15,12 @@ class ViewRecipe extends Component {
 		);
 
 		this.voiceControl_ = new VoiceControl('chicken hands');
+
+		this.voiceControl_.onlisteningchange = this.handleOnListeningChange.bind(this);
+	}
+
+	handleOnListeningChange(event) {
+		this.state.readyToListen_ = event.readyToListen;
 	}
 
 	handleNext() {
@@ -51,6 +57,8 @@ class ViewRecipe extends Component {
 
 							</div>
 
+							<div>{this.state.readyToListen_ ? 'Ready to listen' : 'Processing command...'}</div>
+
 							<div>{`Step ${currentStep + 1} of ${recipe.steps.length}`}</div>
 						</div>
 				}
@@ -65,6 +73,10 @@ ViewRecipe.PROPS = {
 	recipe: Config.object(),
 	router: Config.object()
 };
+
+ViewRecipe.STATE = {
+	readyToListen_:  Config.bool().value(true)
+}
 
 export default connect(
 	(state, props) => (
