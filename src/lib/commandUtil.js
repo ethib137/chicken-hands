@@ -15,15 +15,13 @@ const COMMANDS_TIMER = [...COMMANDS_TIMER_BEGIN, ...COMMANDS_TIMER_END];
 
 const COMMANDS_COMMON = ['SHOW', READ];
 
-const COMMANDS_WITH_ARGUMENTS = [READ, SET, 'SHOW', 'START'];
-
-
 const COMMANDS_ALL = [
-	...COMMANDS_NAVIGATION_BACK,
-	...COMMANDS_NAVIGATION_FORWARD,
+	...COMMANDS_NAVIGATION,
 	...COMMANDS_TIMER,
 	...COMMANDS_COMMON
 ];
+
+const COMMANDS_WITH_ARGUMENTS = [READ, SET, 'SHOW', 'START'];
 
 function isValidCommand(commandString) {
 	return arrayContainsElements(commandString.split(' '), COMMANDS_ALL);
