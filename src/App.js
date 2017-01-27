@@ -2,14 +2,16 @@ import "./styles/App.css";
 
 import Component, {Config} from 'metal-jsx';
 import Route from 'route-parser';
+import {Provider} from 'metal-redux';
 
-import Input from './Input';
+import AddRecipes from './AddRecipe';
 import HashNav from './lib/HashNav';
 import IndexRecipes from './IndexRecipe';
-import AddRecipes from './AddRecipe';
-import NotFound from './NotFound';
-import ViewRecipe from './ViewRecipe';
+import Input from './Input';
 import Nav from './Nav';
+import NotFound from './NotFound';
+import store from './store';
+import ViewRecipe from './ViewRecipe';
 
 const ROUTES = [
 	{
@@ -58,13 +60,15 @@ class App extends Component {
 		const {Page, pageParams} = this.getActivePage();
 
 		return (
-			<div class="container container-fluid container-lg">
-				<Nav />
+			<Provider store={store}>
+				<div class="container container-fluid container-lg">
+					<Nav />
 
-				<div class="row">
-					<Page router={pageParams} />
+					<div class="row">
+						<Page router={pageParams} />
+					</div>
 				</div>
-			</div>
+			</Provider>
 		);
 	}
 }
