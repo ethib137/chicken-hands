@@ -27,7 +27,7 @@ class ViewRecipe extends Component {
 		let action = event.action;
 
 		if (action === ACTIONS.NAVIGATE_BACK) {
-			this.handePrev();
+			this.handlePrev();
 		}
 		else if (action === ACTIONS.NAVIGATE_FORWARD) {
 			this.handleNext();
