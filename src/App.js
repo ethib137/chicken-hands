@@ -7,6 +7,7 @@ import IndexRecipes from './IndexRecipe';
 import AddRecipes from './AddRecipe';
 import NotFound from './NotFound';
 import ViewRecipe from './ViewRecipe';
+import Nav from './Nav';
 
 const ROUTES = {
 	'': IndexRecipes,
@@ -26,6 +27,8 @@ class App extends Component {
 
 		return (
 			<div class="container container-fluid container-lg">
+				<Nav />
+
 				<div class="row">
 					<Page />
 				</div>
