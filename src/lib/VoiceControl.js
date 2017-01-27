@@ -1,3 +1,19 @@
+import {processCommand} from './commandUtil';
+
+function getNewSpeechRecognition(onResultFunction) {
+	let recognition = new webkitSpeechRecognition();
+
+	recognition.continuous = true;
+	recognition.interimResults = true;
+
+	// this.recognition.onstart = event => VoiceControl.speak('I\'m listening');
+	recognition.onresult = onResultFunction;
+
+	recognition.start();
+
+	return recognition
+}
+
 export default class VoiceControl {
 
 	constructor(commandPrefix) {
@@ -5,32 +21,11 @@ export default class VoiceControl {
 
 		this.commandPrefixLastIndex = this.commandPrefix.split(' ').length;
 
-		this.commandsNavigationBack = ['BACK', 'LAST', 'PREVIOUS'];
-		this.commandsNavigationForward = ['FIRST', 'NEXT'];
-		this.commandsTimer = ['END', 'SET', 'START', 'STOP'];
-		this.commandsCommon = ['SHOW', 'READ'];
-
-		this.commandsWithArguments = ['SET', 'SHOW', 'START'];
-
-		this.allCommands = [
-			...this.commandsNavigationBack,
-			...this.commandsNavigationForward,
-			...this.commandsTimer,
-			...this.commandsCommon
-		];
-
-		// Initialize Speech Recognition
-		this.recognition = new webkitSpeechRecognition();
-
-		this.recognition.continuous = true;
-		this.recognition.interimResults = true;
-
-		// this.recognition.onstart = event => VoiceControl.speak('I\'m listening');
-		this.recognition.onresult = event => this.intake(event);
-
-		this.recognition.start();
+		this.recognition = getNewSpeechRecognition(this.intake.bind(this));
 	}
 
+	// @param text String
+	// @return String
 	getCommandFromString(text) {
 		return text.split(' ')
 			.slice(this.commandPrefixLastIndex)
@@ -38,6 +33,7 @@ export default class VoiceControl {
 			.trim();
 	}
 
+	// @param text String
 	// @return String | null
 	getCommandPrefixFromString(text) {
 		return text.split(' ')
@@ -46,6 +42,7 @@ export default class VoiceControl {
 			.trim();
 	}
 
+	// @param event voiceRecognitionEvent
 	// @return void
 	intake(event) {
 		let index = event.resultIndex;
@@ -57,22 +54,21 @@ export default class VoiceControl {
 		}
 	}
 
+	// @param commandPrefix String
 	// @return boolean
 	isValidCommandPrefix(commandPrefix) {
 		return commandPrefix === this.commandPrefix;
 	}
 
-	// @return boolean
-	isValidCommand(commandWordsArray) {
-		return commandWordsArray
-			.some(command => this.allCommands.includes(command));
-	}
-
+	// @param text String
 	// @return void
-	static speak(text) {
+	speak(text) {
 		window.speechSynthesis.speak(new SpeechSynthesisUtterance(text));
+
 	}
 
+	// @param text String
+	// @return void
 	processCommand(text) {
 		text = text.trim().toUpperCase();
 
@@ -80,13 +76,8 @@ export default class VoiceControl {
 		let command = this.getCommandFromString(text);
 
 		if (this.isValidCommandPrefix(prefix)) {
-			console.log('YES chicken hands');
-			// VoiceControl.speak('Good job, you said chicken hands');
-		} else {
-			console.log('NO chicken hands');
-			// VoiceControl.speak('Please say chicken hands and then a command');
+			processCommand(command);
 		}
-
 	}
 
 }
