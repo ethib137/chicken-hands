@@ -23,6 +23,14 @@ const COMMANDS_ALL = [
 
 const COMMANDS_WITH_ARGUMENTS = [READ, SET, 'SHOW', 'START'];
 
+const NAVIGATE_BACK = 'NAVIGATE_BACK';
+const NAVIGATE_FORWARD = 'NAVIGATE_FORWARD';
+
+export const ACTIONS = {
+	NAVIGATE_BACK,
+	NAVIGATE_FORWARD
+}
+
 function isValidCommand(commandString) {
 	return arrayContainsElements(commandString.split(' '), COMMANDS_ALL);
 }
@@ -38,20 +46,26 @@ export function processCommand(commandString) {
 
 	let commandsArray = commandString.split(' ');
 
+	let commandObject = {};
+
+	commandObject.data = {};
+
 	if (arrayContainsElements(commandsArray, COMMANDS_NAVIGATION_BACK)) {
-		return console.log('Navigating back');
+		commandObject.action = ACTIONS.NAVIGATE_BACK;
 	}
 
-	if (arrayContainsElements(commandsArray, COMMANDS_NAVIGATION_FORWARD)) {
-		return console.log('Navigating forward');
+	else if (arrayContainsElements(commandsArray, COMMANDS_NAVIGATION_FORWARD)) {
+		commandObject.action = ACTIONS.NAVIGATE_FORWARD;
 	}
 
-	if (arrayContainsElements(commandsArray, COMMANDS_TIMER)) {
+	else if (arrayContainsElements(commandsArray, COMMANDS_TIMER)) {
 		return console.log('Doing something with a timer');
 	}
 
-	if (arrayContainsElements(commandsArray, COMMANDS_COMMON)) {
+	else if (arrayContainsElements(commandsArray, COMMANDS_COMMON)) {
 		return console.log('Doing some common command');
 	}
+
+	return commandObject;
 
 }
