@@ -20,6 +20,7 @@ export default class VoiceControl {
 		this.commandPrefix = commandPrefix.toUpperCase() || 'CHICKEN HANDS';
 
 		this.onlisteningchange = event => event;
+		this.oncommand = event => event;
 
 		this.fireListeningChange(true);
 
@@ -64,7 +65,7 @@ export default class VoiceControl {
 		let result = event.results[index];
 
 		if (result.isFinal) {
-			this.processCommand(result[0].transcript);
+			this.parseCommand(result[0].transcript);
 
 			this.fireListeningChange(true);
 		}
@@ -80,19 +81,20 @@ export default class VoiceControl {
 	// @return void
 	speak(text) {
 		window.speechSynthesis.speak(new SpeechSynthesisUtterance(text));
-
 	}
 
 	// @param text String
 	// @return void
-	processCommand(text) {
+	parseCommand(text) {
 		text = text.trim().toUpperCase();
 
 		let prefix = this.getCommandPrefixFromString(text);
 		let command = this.getCommandFromString(text);
 
 		if (this.isValidCommandPrefix(prefix)) {
-			processCommand(command);
+			let commandObject = processCommand(command);
+
+			this.oncommand(commandObject);
 		}
 	}
 
