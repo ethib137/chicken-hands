@@ -1,0 +1,34 @@
+{
+  "name": "chicken-hands",
+  "version": "1.0.0",
+  "description": "A recipe utility.",
+  "main": "webpack.config.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "webpack-dev-server --port 3000"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ethib137/chicken-hands.git"
+  },
+  "author": "Liferay",
+  "license": "MIT",
+  "private": true,
+  "bugs": {
+    "url": "https://github.com/ethib137/chicken-hands/issues"
+  },
+  "homepage": "https://github.com/ethib137/chicken-hands#readme",
+  "devDependencies": {
+    "babel-core": "^6.22.1",
+    "babel-loader": "^6.2.10",
+    "babel-preset-es2015": "^6.22.0",
+    "babel-preset-metal-jsx": "0.0.3",
+    "babel-preset-stage-2": "^6.22.0",
+    "css-loader": "^0.26.1",
+    "file-loader": "^0.9.0",
+    "metal-jsx": "^2.6.2",
+    "node-sass": "^4.3.0",
+    "webpack": "^1.14.0",
+    "webpack-dev-server": "^1.16.2"
+  }
+}
