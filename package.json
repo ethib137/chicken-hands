@@ -4,6 +4,7 @@
   "description": "A recipe utility.",
   "main": "webpack.config.js",
   "scripts": {
+    "build": "TARGET=prod webpack",
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "webpack-dev-server --port 3000"
   },
