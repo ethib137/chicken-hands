@@ -97,7 +97,7 @@ class Timer extends Component {
 					<div>
 						<Button display="success" onClick={this.start} size="sm">
 							<span class="glyphicon glyphicon-play" aria-hidden="true"></span>
-							</Button>
+						</Button>
 
 						<Button display="danger" onClick={this.stop} size="sm">
 							<span class="glyphicon glyphicon-stop" aria-hidden="true"></span>
