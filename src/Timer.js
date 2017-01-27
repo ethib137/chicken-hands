@@ -9,10 +9,11 @@ class Timer extends Component {
 		this.interval_;
 
 		this.countDown_ = this.countDown_.bind(this);
+		this.padDisplayTime_ = this.padDisplayTime_.bind(this);
+		this.reset = this.reset.bind(this);
+		this.setDisplayTime_ = this.setDisplayTime_.bind(this);
 		this.start = this.start.bind(this);
 		this.stop = this.stop.bind(this);
-		this.reset = this.reset.bind(this);
-		this.padDisplayTime_ = this.padDisplayTime_.bind(this);
 	}
 
 	reset() {
@@ -85,7 +86,6 @@ class Timer extends Component {
 		else {
 			displayTime = '0:' + this.padDisplayTime_(seconds);
 		}
-
 
 		return (
 			<div class="card timer">
