@@ -31,6 +31,7 @@
     "lodash": "^4.17.4",
     "metal-jsx": "^2.6.2",
     "node-sass": "^4.3.0",
+    "route-parser": "0.0.5",
     "sass-loader": "^4.1.1",
     "style-loader": "^0.13.1",
     "webpack": "^1.14.0",

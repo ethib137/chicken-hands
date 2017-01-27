@@ -1,9 +1,13 @@
-import Component from 'metal-jsx';
+import Component, {Config} from 'metal-jsx';
 
-class ViewRecipes extends Component {
+class ViewRecipe extends Component {
 	render() {
-		return <h1>View Recipes</h1>;
+		return <h1>View Recipe: {this.props.router.id}</h1>;
 	}
 }
 
-export default ViewRecipes;
+ViewRecipe.PROPS = {
+	router: Config.object()
+};
+
+export default ViewRecipe;

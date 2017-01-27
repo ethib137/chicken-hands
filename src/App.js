@@ -1,5 +1,7 @@
-import Component, {Config} from 'metal-jsx';
 import "./styles/App.css";
+
+import Component, {Config} from 'metal-jsx';
+import Route from 'route-parser';
 
 import Input from './Input';
 import HashNav from './lib/HashNav';
@@ -9,11 +11,20 @@ import NotFound from './NotFound';
 import ViewRecipe from './ViewRecipe';
 import Nav from './Nav';
 
-const ROUTES = {
-	'': IndexRecipes,
-	'add': AddRecipes,
-	'view': ViewRecipe
-};
+const ROUTES = [
+	{
+		route: new Route(''),
+		component: IndexRecipes
+	},
+	{
+		route: new Route('add'),
+		component: AddRecipes
+	},
+	{
+		route: new Route('view/:id'),
+		component: ViewRecipe
+	}
+];
 
 class App extends Component {
 	attached() {
@@ -22,15 +33,36 @@ class App extends Component {
 		});
 	}
 
+	getActivePage() {
+		const routeConfig = ROUTES.find(({route}) => !!route.match(this.state.hash))
+
+		let Page;
+		let pageParams;
+
+		if (!routeConfig) {
+			Page = NotFound;
+			pageParams = {};
+		}
+		else {
+			Page = routeConfig.component;
+			pageParams = routeConfig.route.match(this.state.hash);
+		}
+
+		return {
+			Page,
+			pageParams
+		};
+	}
+
 	render() {
-		const Page = ROUTES[this.state.hash] || NotFound;
+		const {Page, pageParams} = this.getActivePage();
 
 		return (
 			<div class="container container-fluid container-lg">
 				<Nav />
 
 				<div class="row">
-					<Page />
+					<Page router={pageParams} />
 				</div>
 			</div>
 		);
