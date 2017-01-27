@@ -95,11 +95,17 @@ class Timer extends Component {
 					<div class="current-time card-text">{displayTime}</div>
 
 					<div>
-						<Button display="success" onClick={this.start} size="sm">Start</Button>
+						<Button display="success" onClick={this.start} size="sm">
+							<span class="glyphicon glyphicon-play" aria-hidden="true"></span>
+							</Button>
 
-						<Button display="danger" onClick={this.stop} size="sm">Stop</Button>
+						<Button display="danger" onClick={this.stop} size="sm">
+							<span class="glyphicon glyphicon-stop" aria-hidden="true"></span>
+						</Button>
 
-						<Button display="primary" onClick={this.reset} size="sm">Reset</Button>
+						<Button display="primary" onClick={this.reset} size="sm">
+							<span class="glyphicon glyphicon-repeat" aria-hidden="true"></span>
+						</Button>
 					</div>
 				</div>
 			</div>
