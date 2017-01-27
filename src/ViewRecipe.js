@@ -1,6 +1,7 @@
 import Component, {Config} from 'metal-jsx';
 import {bindAll} from 'lodash';
 import {connect} from 'metal-redux';
+import VoiceControl from './lib/VoiceControl';
 
 import {nextStep, prevStep} from './actions/recipes';
 
@@ -11,6 +12,8 @@ class ViewRecipe extends Component {
 			'handleNext',
 			'handlePrev'
 		);
+
+		this.voiceControl_ = new VoiceControl('chicken hands');
 	}
 
 	handleNext() {
