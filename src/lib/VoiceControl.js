@@ -1,8 +1,9 @@
 export default class VoiceControl {
-	constructor(commandPrefix) {
-		this.commandPrefix = commandPrefix.t() || 'CHICKEN HANDS';
 
-		this.commandPrefixLastIndex = COMMAND_PREFIX.split(' ').length - 1;
+	constructor(commandPrefix) {
+		this.commandPrefix = commandPrefix.toUpperCase() || 'CHICKEN HANDS';
+
+		this.commandPrefixLastIndex = this.commandPrefix.split(' ').length;
 
 		this.commandsNavigationBack = ['BACK', 'LAST', 'PREVIOUS'];
 		this.commandsNavigationForward = ['FIRST', 'NEXT'];
@@ -12,10 +13,10 @@ export default class VoiceControl {
 		this.commandsWithArguments = ['SET', 'SHOW', 'START'];
 
 		this.allCommands = [
-			...commandsNavigationBack,
-			...commandsNavigationForward,
-			...commandsTimer,
-			...commandsCommon,
+			...this.commandsNavigationBack,
+			...this.commandsNavigationForward,
+			...this.commandsTimer,
+			...this.commandsCommon
 		];
 
 		// Initialize Speech Recognition
@@ -24,7 +25,7 @@ export default class VoiceControl {
 		this.recognition.continuous = true;
 		this.recognition.interimResults = true;
 
-		this.recognition.onstart = event => VoiceControl.speak('I\'m listening');
+		// this.recognition.onstart = event => VoiceControl.speak('I\'m listening');
 		this.recognition.onresult = event => this.intake(event);
 
 		this.recognition.start();
@@ -68,7 +69,7 @@ export default class VoiceControl {
 	}
 
 	// @return void
-	static speak() {
+	static speak(text) {
 		window.speechSynthesis.speak(new SpeechSynthesisUtterance(text));
 	}
 
@@ -76,16 +77,16 @@ export default class VoiceControl {
 		text = text.trim().toUpperCase();
 
 		let prefix = this.getCommandPrefixFromString(text);
+		let command = this.getCommandFromString(text);
 
-		if (isValidCommandPrefix(prefix)) {
-			// console.log('YES chicken hands');
-			speak('Good job, you said chicken hands');
+		if (this.isValidCommandPrefix(prefix)) {
+			console.log('YES chicken hands');
+			// VoiceControl.speak('Good job, you said chicken hands');
 		} else {
-			// console.log('did not say chicken hands');
-			speak('Please say chicken hands and then a command');
+			console.log('NO chicken hands');
+			// VoiceControl.speak('Please say chicken hands and then a command');
 		}
 
-		let command = this.getCommandFromString(text);
 	}
 
 }
