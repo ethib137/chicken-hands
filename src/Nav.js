@@ -4,7 +4,7 @@ class Nav extends Component {
 	render() {
 		return (
 			<nav class="navbar navbar-light bg-faded">
-				<a class="navbar-brand" href="#">Chicken Hands</a>
+				<a class="navbar-brand" href="#"><img src="./src/images/logo.svg" alt="Chicken Hands" width="42" height="42"/></a>
 
 				<ul class="nav navbar-nav">
 					<li class="nav-item">
