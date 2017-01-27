@@ -35,8 +35,17 @@ class Timer extends Component {
 		this.state.currentTime_ = newVal;
 	}
 
+	chime_() {
+	}
+
 	countDown_() {
-		this.state.currentTime_ = this.state.currentTime_ - INT_SEC;
+		if (this.state.currentTime_ > 0) {
+			this.state.currentTime_ = this.state.currentTime_ - INT_SEC;
+		}
+		else {
+			this.stop();
+			this.chime_();
+		}
 	}
 
 	padDisplayTime_(val) {
@@ -46,27 +55,35 @@ class Timer extends Component {
 		return pad.substring(0, pad.length - str.length) + str;
 	}
 
+	setDisplayTime_(time) {
+		var timeRemainder = time % INT_SIXTY;
+
+		var timeLeft = (time - (timeRemainder)) / INT_SIXTY;
+
+		timeRight = this.padDisplayTime_(timeRemainder);
+
+		return timeLeft + ':' + timeRight;
+	}
+
 	render() {
 		const {
 			time,
 			name
 		} = this.props;
 
+		var displayTime;
+
 		var seconds = this.state.currentTime_ / INT_SEC;
-		var displaySeconds = seconds % INT_SIXTY;
-		var displayMinutes = (seconds - displaySeconds) / INT_SIXTY;
+		var minutes = (seconds - (seconds % INT_SIXTY)) / INT_SIXTY;
 
-		displaySeconds = this.padDisplayTime_(displaySeconds);
-
-		var displayTime = displayMinutes + ':' + displaySeconds;
-
-		if (displayMinutes > 59) {
-			var displayHours = (displayMinutes - (displayMinutes % INT_SIXTY)) / INT_SIXTY;
-			var displayMinutes = displayMinutes % INT_SIXTY;
-
-			displayMinutes = this.padDisplayTime_(displayMinutes);
-
-			displayTime = displayHours + ':' + displayMinutes;
+		if (minutes > 59) {
+			displayTime = this.setDisplayTime_(minutes);
+		}
+		else if (seconds > 59) {
+			displayTime = this.setDisplayTime_(seconds)
+		}
+		else {
+			displayTime = '0:' + this.padDisplayTime_(seconds);
 		}
 
 
