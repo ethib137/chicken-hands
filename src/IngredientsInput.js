@@ -1,3 +1,5 @@
+import "./styles/ingredients-input.css";
+
 import Component, {Config} from 'metal-jsx';
 
 import {bindAll, cloneDeep} from 'lodash';
@@ -54,7 +56,7 @@ class Ingredient extends Component {
 		} = this.props;
 
 		return (
-			<div class="row">
+			<div class="ingredient row">
 				<div class="col-sm-1">
 					<label>{index + 1}{'.'}</label>
 				</div>
@@ -103,7 +105,7 @@ class IngredientsInput extends Component {
 	}
 
 	onChange_() {
-		this.props.onChange(this.state.steps_);
+		this.props.onChange(this.state.ingredients_);
 	}
 
 	onIngredientChange_({index, type, value}) {
@@ -120,7 +122,7 @@ class IngredientsInput extends Component {
 		const {ingredients_} = this.state;
 
 		return (
-			<div class="ingredients-list-container">
+			<div class="ingredients-input-container">
 				<label>{'Ingredients'}</label>
 
 				{

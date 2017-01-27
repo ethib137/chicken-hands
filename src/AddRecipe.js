@@ -63,34 +63,38 @@ class AddRecipe extends Component {
 		} = this.state;
 
 		return (
-			<div class="add-recipe">
-				<h1>Add Recipe</h1>
+			<div class="add-recipe panel panel-default">
+				<div class="panel-heading">
+					<h1>Add Recipe</h1>
+				</div>
 
-				<FormGroup>
-					<label for="title">Title</label>
-					<Input
-						id="title"
-						onInput={this.onTitleChange_}
-						placeholder="Best Chicken Fajitas Ever!"
-						value={title_}
-					/>
-				</FormGroup>
+				<div class="panel-body">
+					<FormGroup>
+						<label for="title">Title</label>
+						<Input
+							id="title"
+							onInput={this.onTitleChange_}
+							placeholder="Best Chicken Fajitas Ever!"
+							value={title_}
+						/>
+					</FormGroup>
 
-				<FormGroup>
-					<label for="description">Description</label>
-					<Textarea
-						id="description"
-						onInput={this.onDescriptionChange_}
-						placeholder="We made theses in June 2011 and they were fantastic..."
-						value={description_}
-					/>
-				</FormGroup>
+					<FormGroup>
+						<label for="description">Description</label>
+						<Textarea
+							id="description"
+							onInput={this.onDescriptionChange_}
+							placeholder="We made these in June 2011 and they were fantastic..."
+							value={description_}
+						/>
+					</FormGroup>
 
-				<IngredientsInput onChange={this.onIngredientsChange_} />
+					<IngredientsInput onChange={this.onIngredientsChange_} />
 
-				<StepsInput onChange={this.onStepsChange_} />
+					<StepsInput onChange={this.onStepsChange_} />
 
-				<Button display="primary" onClick={this.addRecipe_}>{'Add Recipe'}</Button>
+					<Button display="primary" onClick={this.addRecipe_}>{'Add Recipe'}</Button>
+				</div>
 			</div>
 		);
 	}

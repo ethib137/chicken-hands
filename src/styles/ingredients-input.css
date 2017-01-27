@@ -1,0 +1,7 @@
+.ingredients-input-container {
+	margin-bottom: 20px;
+
+	.ingredient {
+		margin-bottom: 10px;
+	}
+}

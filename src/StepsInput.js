@@ -1,3 +1,5 @@
+import "./styles/steps-input.css";
+
 import Component, {Config} from 'metal-jsx';
 import getCN from 'classnames';
 import {bindAll, cloneDeep} from 'lodash';
@@ -31,7 +33,7 @@ class Step extends Component {
 		} = this.props;
 
 		return (
-			<div class="row">
+			<div class="step row">
 				<div class="col-sm-1">
 					<label>{index + 1}{'.'}</label>
 				</div>

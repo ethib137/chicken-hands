@@ -8,7 +8,7 @@ class Nav extends Component {
 
 				<ul class="nav navbar-nav">
 					<li class="nav-item">
-						<a class="nav-link" href="#add">Add</a>
+						<a class="nav-link" href="#add">Add New Recipe</a>
 					</li>
 				</ul>
 			</nav>
