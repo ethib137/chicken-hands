@@ -19,6 +19,10 @@ export default class VoiceControl {
 	constructor(commandPrefix) {
 		this.commandPrefix = commandPrefix.toUpperCase() || 'CHICKEN HANDS';
 
+		this.readytolisten = true;
+
+		this.onlisteningchange = event => event;
+
 		this.commandPrefixLastIndex = this.commandPrefix.split(' ').length;
 
 		this.recognition = getNewSpeechRecognition(this.intake.bind(this));
@@ -42,15 +46,27 @@ export default class VoiceControl {
 			.trim();
 	}
 
+	fireListeningChange(readyToListen) {
+		this.readytolisten = readyToListen;
+
+		this.onlisteningchange({readyToListen});
+	}
+
 	// @param event voiceRecognitionEvent
 	// @return void
 	intake(event) {
+		if (this.readytolisten) {
+			this.fireListeningChange(false);
+		}
+
 		let index = event.resultIndex;
 
 		let result = event.results[index];
 
 		if (result.isFinal) {
 			this.processCommand(result[0].transcript);
+
+			this.fireListeningChange(true);
 		}
 	}
 
