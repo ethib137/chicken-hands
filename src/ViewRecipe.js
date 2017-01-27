@@ -7,6 +7,8 @@ import Button from './Button';
 import VoiceControl from './lib/VoiceControl';
 import {nextStep, prevStep} from './actions/recipes';
 
+import {ACTIONS} from './lib/commandUtil';
+
 class ViewRecipe extends Component {
 	created() {
 		bindAll(
@@ -18,6 +20,18 @@ class ViewRecipe extends Component {
 		this.voiceControl_ = new VoiceControl('chicken hands');
 
 		this.voiceControl_.onlisteningchange = this.handleOnListeningChange.bind(this);
+		this.voiceControl_.oncommand = this.handleOnCommand.bind(this);
+	}
+
+	handleOnCommand(event) {
+		let action = event.action;
+
+		if (action === ACTIONS.NAVIGATE_BACK) {
+			this.handePrev();
+		}
+		else if (action === ACTIONS.NAVIGATE_FORWARD) {
+			this.handleNext();
+		}
 	}
 
 	handleOnListeningChange(event) {
