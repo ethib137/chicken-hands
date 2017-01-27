@@ -36,7 +36,7 @@ module.exports = {
         loaders: ['style', 'css', 'sass']
       },
       {
-        test: /(\.html|\.png)$/,
+        test: /(\.html|\.png|\.ico)$/,
         exclude: /node_modules/,
         loader: 'file?name=[name].[ext]'
       },

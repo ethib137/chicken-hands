@@ -1,0 +1,15 @@
+.view-recipe-container {
+	.current-step {
+		color: #6CD27F;
+		font-size: 32px;
+	}
+
+	.step-counter {
+		align-items: center;
+		display: flex;
+	}
+
+	.step-label {
+		margin-left: 8px;
+	}
+}

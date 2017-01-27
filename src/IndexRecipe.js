@@ -11,9 +11,9 @@ class IndexRecipe extends Component {
 					<h2>No Recipes created yet!</h2>
 				}
 
-				<ul>
+				<ul class="list-group">
 					{!!recipes.length && recipes.map(
-						recipe => <li>
+						recipe => <li class="list-group-item">
 							<a href={`#view/${recipe.id}`}>{recipe.title}</a>
 						</li>
 					)}

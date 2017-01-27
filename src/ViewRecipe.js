@@ -2,6 +2,7 @@ import Component, {Config} from 'metal-jsx';
 import {bindAll} from 'lodash';
 import {connect} from 'metal-redux';
 
+import './styles/view-recipe.css';
 import Button from './Button';
 import VoiceControl from './lib/VoiceControl';
 import {nextStep, prevStep} from './actions/recipes';
@@ -45,21 +46,30 @@ class ViewRecipe extends Component {
 				}
 
 				{recipe &&
-						<div>
-							<h2>Title: {recipe.title}</h2>
-							<h2>description: {recipe.description}</h2>
-
-							<p>{recipe.steps[recipe.currentStep]}</p>
-
-							<div class="btn-group" role="group" aria-label="...">
-								<Button disabled={currentStep === 0} onClick={this.handlePrev}>Prev</Button>
-								<Button disabled={currentStep === stepCount - 1} onClick={this.handleNext}>Next</Button>
-
+						<div class="view-recipe-container panel panel-default">
+							<div class="panel-heading">
+								<h1>Title: {recipe.title}</h1>
 							</div>
 
-							<div>{this.state.readyToListen_ ? 'Ready to listen' : 'Processing command...'}</div>
+							<div class="panel-body">
+								<h2>Description:</h2>
+								<p>{recipe.description}</p>
 
-							<div>{`Step ${currentStep + 1} of ${recipe.steps.length}`}</div>
+								<h2>Current Step:</h2>
+								<p class="current-step">{recipe.steps[recipe.currentStep]}</p>
+
+								<div class="step-counter">
+									<div class="btn-group" role="group" aria-label="...">
+										<Button disabled={currentStep === 0} onClick={this.handlePrev}>Prev</Button>
+										<Button disabled={currentStep === stepCount - 1} onClick={this.handleNext}>Next</Button>
+									</div>
+
+									<div class="step-label">{`Step ${currentStep + 1} of ${recipe.steps.length}`}</div>
+								</div>
+
+								<div>{this.state.readyToListen_ ? 'Ready to listen' : 'Processing command...'}</div>
+							</div>
+
 						</div>
 				}
 			</div>

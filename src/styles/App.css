@@ -5,3 +5,15 @@ body {
   font-family: 'Oswald', sans-serif;
   min-height: 100vh;
 }
+
+h1 {
+	font-size: 20px;
+}
+
+h2 {
+	font-size: 18px;
+}
+
+h3 {
+	font-size: 16px;
+}

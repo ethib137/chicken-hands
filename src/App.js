@@ -1,4 +1,4 @@
-import "./styles/App.css";
+import "./styles/app.css";
 
 import Component, {Config} from 'metal-jsx';
 import Route from 'route-parser';
