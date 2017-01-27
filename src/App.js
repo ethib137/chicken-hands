@@ -1,4 +1,5 @@
 import Component from 'metal-jsx';
+import "./styles/App.css";
 
 class App extends Component {
   render() {
