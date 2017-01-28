@@ -16,15 +16,15 @@ function getNewSpeechRecognition(onResultFunction) {
 
 export default class VoiceControl {
 
-	constructor(commandPrefix) {
-		this.commandPrefix = commandPrefix.toUpperCase() || 'CHICKEN HANDS';
+	constructor(commandPrefixArray) {
+		this.commandPrefixArray = commandPrefixArray.map(prefix => prefix.toUpperCase()) || ['CHICKEN HANDS', 'CHICKEN HAND'];
 
 		this.onlisteningchange = event => event;
 		this.oncommand = event => event;
 
 		this.fireListeningChange(true);
 
-		this.commandPrefixLastIndex = this.commandPrefix.split(' ').length;
+		this.commandPrefixLastIndex = this.commandPrefixArray[0].split(' ').length;
 
 		this.recognition = getNewSpeechRecognition(this.intake.bind(this));
 	}
@@ -74,7 +74,7 @@ export default class VoiceControl {
 	// @param commandPrefix String
 	// @return boolean
 	isValidCommandPrefix(commandPrefix) {
-		return commandPrefix === this.commandPrefix;
+		return this.commandPrefixArray.some(prefix => prefix === commandPrefix);
 	}
 
 	// @param text String
@@ -90,6 +90,11 @@ export default class VoiceControl {
 
 		let prefix = this.getCommandPrefixFromString(text);
 		let command = this.getCommandFromString(text);
+
+		console.group('Full command: ', text);
+			console.log('prefix: ', prefix);
+			console.log('command: ', command);
+		console.groupEnd('Command');
 
 		if (this.isValidCommandPrefix(prefix)) {
 			let commandObject = processCommand(command);
