@@ -1,6 +1,6 @@
 # Chicken Hands!
 
-![logo](https://raw.githubusercontent.com/ethib137/chicken-hands/master/src/images/logo.svg)
+![logo](/src/images/logo.png)
 
 Chicken hands is a helpful cooking companion for when your hands are occupied.
 
