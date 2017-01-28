@@ -10,8 +10,12 @@ import IndexRecipes from './IndexRecipe';
 import Input from './Input';
 import Nav from './Nav';
 import NotFound from './NotFound';
+import recipes from './sample-recipes';
 import store from './store';
 import ViewRecipe from './ViewRecipe';
+import {addRecipe} from './actions/recipes';
+
+recipes.forEach(recipe => store.dispatch(addRecipe(recipe)));
 
 const ROUTES = [
 	{
