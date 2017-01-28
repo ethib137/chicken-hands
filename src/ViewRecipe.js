@@ -83,19 +83,20 @@ class ViewRecipe extends Component {
 
 				{recipe &&
 					<div class={classnames}>
-						<div class="view-header panel-heading">
-							<h1>{recipe.title}</h1>
+						<div class="panel-heading">
+							<div class="view-header">
+								<h1>{recipe.title}</h1>
+								<a href="javascript:;" onClick={this.toggleMaximized}>
+									<span class="glyphicon glyphicon-zoom-in"></span>
+								</a>
+							</div>
+							<div class="description">
+								<p>{recipe.description}</p>
+							</div>
 
-							<a href="javascript:;" onClick={this.toggleMaximized}>
-								<span class="glyphicon glyphicon-zoom-in"></span>
-							</a>
 						</div>
 
 						<div class="panel-body">
-							<div class="description">
-								<h2>Description:</h2>
-								<p>{recipe.description}</p>
-							</div>
 
 							{this.state.maximized_ &&
 								<a href="javascript:;" onClick={this.toggleMaximized}>
