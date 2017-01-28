@@ -1,5 +1,8 @@
 import {intersection} from 'lodash';
 
+const COMMANDS_MAXIMIZE = ['MAXIMIZE', 'START', 'FULL SCREEN'];
+const COMMANDS_MINIMIZE = ['MINIMIZE', 'STOP', 'HIDE', 'CLOSE'];
+
 const COMMANDS_NAVIGATION_BACK = ['BACK', 'FIRST', 'PREVIOUS'];
 const COMMANDS_NAVIGATION_FORWARD = ['LAST', 'NEXT', 'FORWARD'];
 
@@ -20,6 +23,8 @@ const COMMANDS_ALL = [
 
 const COMMANDS_WITH_ARGUMENTS = [READ, SET, 'SHOW', 'START'];
 
+const MAXIMIZE = 'MAXIMIZE';
+const MINIMIZE = 'MINIMIZE';
 const NAVIGATE_BACK = 'NAVIGATE_BACK';
 const NAVIGATE_FORWARD = 'NAVIGATE_FORWARD';
 const NO_ACTION = 'NO_ACTION'
@@ -27,6 +32,8 @@ const READ = 'READ';
 const SET = 'SET';
 
 export const ACTIONS = {
+	MAXIMIZE,
+	MINIMIZE,
 	NAVIGATE_BACK,
 	NAVIGATE_FORWARD,
 	NO_ACTION,
@@ -49,7 +56,16 @@ export function processCommand(commandString) {
 		data: {}
 	};
 
-	if (arrayContainsElements(commandsArray, COMMANDS_NAVIGATION_BACK)) {
+
+	if (arrayContainsElements(commandsArray, COMMANDS_MAXIMIZE)) {
+		commandObject.action = ACTIONS.MAXIMIZE;
+	}
+
+	else if (arrayContainsElements(commandsArray, COMMANDS_MINIMIZE)) {
+		commandObject.action = ACTIONS.MINIMIZE;
+	}
+
+	else if (arrayContainsElements(commandsArray, COMMANDS_NAVIGATION_BACK)) {
 		commandObject.action = ACTIONS.NAVIGATE_BACK;
 	}
 

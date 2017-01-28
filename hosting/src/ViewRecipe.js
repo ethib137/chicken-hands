@@ -1,6 +1,6 @@
 import Component, {Config} from 'metal-jsx';
 import getCN from 'classnames';
-import {bindAll} from 'lodash';
+import {bindAll, isBoolean} from 'lodash';
 import {connect} from 'metal-redux';
 
 import './styles/view-recipe.css';
@@ -28,7 +28,13 @@ class ViewRecipe extends Component {
 	handleOnCommand(event) {
 		let action = event.action;
 
-		if (action === ACTIONS.NAVIGATE_BACK) {
+		if (action === ACTIONS.MAXIMIZE) {
+			this.toggleMaximized(true);
+		}
+		else if (action === ACTIONS.MINIMIZE) {
+			this.toggleMaximized(false);
+		}
+		else if (action === ACTIONS.NAVIGATE_BACK) {
 			this.handlePrev();
 		}
 		else if (action === ACTIONS.NAVIGATE_FORWARD) {
@@ -58,8 +64,12 @@ class ViewRecipe extends Component {
 		this.voiceControl_.speak(instructions);
 	}
 
-	toggleMaximized() {
-		this.state.maximized_ = !this.state.maximized_;
+	toggleMaximized(maximized) {
+		if (!isBoolean(maximized)) {
+			maximized = !this.state.maximized_;
+		}
+
+		this.state.maximized_ = maximized;
 	}
 
 	render() {
