@@ -32,6 +32,9 @@ class ViewRecipe extends Component {
 		else if (action === ACTIONS.NAVIGATE_FORWARD) {
 			this.handleNext();
 		}
+		else if (action === ACTIONS.READ) {
+			this.handleRead();
+		}
 	}
 
 	handleOnListeningChange(event) {
@@ -44,6 +47,13 @@ class ViewRecipe extends Component {
 
 	handlePrev() {
 		this.props.prevStep(this.props.router.id);
+	}
+
+	handleRead() {
+		const recipe = this.props.recipe.toJS();
+		const instructions = recipe.steps[recipe.currentStep];
+
+		this.voiceControl_.speak(instructions);
 	}
 
 	render() {
