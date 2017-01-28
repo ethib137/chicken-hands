@@ -1,4 +1,5 @@
 import Component, {Config} from 'metal-jsx';
+import getCN from 'classnames';
 import {bindAll} from 'lodash';
 import {connect} from 'metal-redux';
 
@@ -14,7 +15,8 @@ class ViewRecipe extends Component {
 		bindAll(
 			this,
 			'handleNext',
-			'handlePrev'
+			'handlePrev',
+			'toggleMaximized'
 		);
 
 		this.voiceControl_ = new VoiceControl('chicken hands');
@@ -56,6 +58,10 @@ class ViewRecipe extends Component {
 		this.voiceControl_.speak(instructions);
 	}
 
+	toggleMaximized() {
+		this.state.maximized_ = !this.state.maximized_;
+	}
+
 	render() {
 		const recipe = this.props.recipe.toJS();
 
@@ -63,38 +69,54 @@ class ViewRecipe extends Component {
 
 		const {currentStep} = recipe;
 
+		const classnames = getCN('recipe-viewer panel panel-default',
+			{
+				maximized: this.state.maximized_
+			}
+		);
+
 		return (
-			<div class="view-container">
+			<div class="view-recipe-container">
 				{!recipe &&
-						<h2>Recipe not found!</h2>
+					<h2>Recipe not found!</h2>
 				}
 
 				{recipe &&
-						<div class="view-recipe-container panel panel-default">
-							<div class="panel-heading">
-								<h1>Title: {recipe.title}</h1>
-							</div>
+					<div class={classnames}>
+						<div class="view-header panel-heading">
+							<h1>{recipe.title}</h1>
 
-							<div class="panel-body">
+							<a href="javascript:;" onClick={this.toggleMaximized}>
+								<span class="glyphicon glyphicon-zoom-in"></span>
+							</a>
+						</div>
+
+						<div class="panel-body">
+							<div class="description">
 								<h2>Description:</h2>
 								<p>{recipe.description}</p>
-
-								<h2>Current Step:</h2>
-								<p class="current-step">{recipe.steps[recipe.currentStep]}</p>
-
-								<div class="step-counter">
-									<div class="btn-group" role="group" aria-label="...">
-										<Button disabled={currentStep === 0} onClick={this.handlePrev}>Prev</Button>
-										<Button disabled={currentStep === stepCount - 1} onClick={this.handleNext}>Next</Button>
-									</div>
-
-									<div class="step-label">{`Step ${currentStep + 1} of ${recipe.steps.length}`}</div>
-								</div>
-
 							</div>
 
-							<div class="listening-state">{this.state.readyToListen_ ? 'Ready to listen' : 'Processing command...'}</div>
+							{this.state.maximized_ &&
+								<a href="javascript:;" onClick={this.toggleMaximized}>
+									<span class="glyphicon glyphicon-zoom-out"></span>
+								</a>
+							}
+
+							<div class="step-counter">
+								<div class="btn-group" role="group" aria-label="...">
+									<Button disabled={currentStep === 0} onClick={this.handlePrev}>Prev</Button>
+									<Button disabled={currentStep === stepCount - 1} onClick={this.handleNext}>Next</Button>
+								</div>
+
+								<div class="step-label">{`Step ${currentStep + 1} of ${recipe.steps.length}`}</div>
+							</div>
+
+							<p class="current-step">{recipe.steps[recipe.currentStep]}</p>
 						</div>
+
+						<div class="listening-state">{this.state.readyToListen_ ? 'Ready to listen' : 'Processing command...'}</div>
+					</div>
 				}
 			</div>
 		)
@@ -109,7 +131,8 @@ ViewRecipe.PROPS = {
 };
 
 ViewRecipe.STATE = {
-	readyToListen_:  Config.bool().value(true)
+	readyToListen_:  Config.bool().value(true),
+	maximized_: Config.bool().value(false)
 }
 
 export default connect(
