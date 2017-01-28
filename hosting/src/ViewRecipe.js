@@ -1,6 +1,6 @@
 import Component, {Config} from 'metal-jsx';
 import getCN from 'classnames';
-import {bindAll} from 'lodash';
+import {bindAll, isBoolean} from 'lodash';
 import {connect} from 'metal-redux';
 
 import './styles/view-recipe.css';
@@ -14,6 +14,8 @@ class ViewRecipe extends Component {
 	created() {
 		bindAll(
 			this,
+			'decreaseFontSize',
+			'increaseFontSize',
 			'handleNext',
 			'handlePrev',
 			'toggleMaximized',
@@ -29,7 +31,19 @@ class ViewRecipe extends Component {
 	handleOnCommand(event) {
 		let action = event.action;
 
-		if (action === ACTIONS.NAVIGATE_BACK) {
+		if (action === ACTIONS.DECREASE_FONT) {
+			this.decreaseFontSize();
+		}
+		else if (action === ACTIONS.INCREASE_FONT) {
+			this.increaseFontSize();
+		}
+		else if (action === ACTIONS.MAXIMIZE) {
+			this.toggleMaximized(true);
+		}
+		else if (action === ACTIONS.MINIMIZE) {
+			this.toggleMaximized(false);
+		}
+		else if (action === ACTIONS.NAVIGATE_BACK) {
 			this.handlePrev();
 		}
 		else if (action === ACTIONS.NAVIGATE_FORWARD) {
@@ -59,8 +73,20 @@ class ViewRecipe extends Component {
 		this.voiceControl_.speak(instructions);
 	}
 
-	toggleMaximized() {
-		this.state.maximized_ = !this.state.maximized_;
+	decreaseFontSize() {
+		this.state.baseFontSize_ = this.state.baseFontSize_ - 5;
+	}
+
+	increaseFontSize() {
+		this.state.baseFontSize_ = this.state.baseFontSize_ + 5;
+	}
+
+	toggleMaximized(maximized) {
+		if (!isBoolean(maximized)) {
+			maximized = !this.state.maximized_;
+		}
+
+		this.state.maximized_ = maximized;
 	}
 
 	toggleShowIngredients() {
@@ -68,6 +94,8 @@ class ViewRecipe extends Component {
 	}
 
 	render() {
+		const {baseFontSize_, maximized_} = this.state;
+
 		const recipe = this.props.recipe.toJS();
 
 		const stepCount = recipe.steps.length;
@@ -79,6 +107,26 @@ class ViewRecipe extends Component {
 		const classnames = getCN('recipe-viewer panel panel-default',
 			{
 				maximized: this.state.maximized_
+			}
+		);
+
+		const counterStyle = {
+			fontSize: baseFontSize_ * 1.5 + 'px'
+		};
+
+		const stepStyle = {
+			fontSize: baseFontSize_ * 2 + 'px'
+		};
+
+		const readyToListen = this.state.readyToListen_;
+
+		const listeningStateText = readyToListen ? 'Ready to listen' : 'Processing command...';
+		const listeningStateClass = readyToListen ? 'ready' : 'not-ready';
+
+		const listeningStateClassNames = getCN('listening-state',
+			{
+				ready: readyToListen,
+				['not-ready']: !readyToListen
 			}
 		);
 
@@ -105,13 +153,13 @@ class ViewRecipe extends Component {
 
 						<div class="panel-body">
 
-							{this.state.maximized_ &&
+							{maximized_ &&
 								<a href="javascript:;" onClick={this.toggleMaximized}>
 									<span class="glyphicon glyphicon-zoom-out"></span>
 								</a>
 							}
 
-							<div class="step-counter">
+							<div class="step-counter" style={maximized_ ? counterStyle : ''}>
 								<div class="btn-group" role="group" aria-label="...">
 									<Button disabled={currentStep === 0} onClick={this.handlePrev}>Prev</Button>
 									<Button disabled={currentStep === stepCount - 1} onClick={this.handleNext}>Next</Button>
@@ -120,8 +168,7 @@ class ViewRecipe extends Component {
 								<div class="step-label">{`Step ${currentStep + 1} of ${recipe.steps.length}`}</div>
 							</div>
 
-							<p class="current-step">{recipe.steps[recipe.currentStep]}</p>
-
+							<p class="current-step"  style={maximized_ ? stepStyle : ''}>{recipe.steps[recipe.currentStep]}</p>
 						</div>
 
 						<div class="ingredient-list panel-footer">
@@ -140,11 +187,12 @@ class ViewRecipe extends Component {
 									)}
 								</ul>
 							}
-						</div>
 
-						<div class="listening-state">{this.state.readyToListen_ ? 'Ready to listen' : 'Processing command...'}</div>
+						</div>
 					</div>
 				}
+
+				<div class={listeningStateClassNames}>{listeningStateText}</div>
 			</div>
 		)
 	}
@@ -158,6 +206,7 @@ ViewRecipe.PROPS = {
 };
 
 ViewRecipe.STATE = {
+	baseFontSize_: Config.number().value(40),
 	readyToListen_:  Config.bool().value(true),
 	showIngredients_: Config.bool().value(false),
 	maximized_: Config.bool().value(false)

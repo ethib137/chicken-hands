@@ -6,8 +6,22 @@
 
 	.listening-state {
 		bottom: 8px;
-		left: 8px;
+		right: 8px;
 		position: fixed;
+		text-align: center;
+		line-height: 100px;
+
+		height: 100px;
+		width: 100px;
+		border-radius: 100%;
+
+		&.ready {
+			background-color: #6CD27F;
+		}
+
+		&.not-ready {
+			background-color: orange;
+		}
 	}
 
 	.step-counter {
