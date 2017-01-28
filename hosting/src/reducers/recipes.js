@@ -3,8 +3,6 @@ import {List, Map, fromJS} from 'immutable';
 
 import {ACTION_TYPES} from '../actions/recipes';
 
-const testId = uniqueId();
-
 export default function(state = Map(), action) {
 	switch(action.type) {
 		case ACTION_TYPES.ADD:
