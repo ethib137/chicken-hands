@@ -1,5 +1,5 @@
 import {uniqueId} from 'lodash';
-import {Map, fromJS} from 'immutable';
+import {List, Map, fromJS} from 'immutable';
 
 import {ACTION_TYPES} from '../actions/recipes';
 
