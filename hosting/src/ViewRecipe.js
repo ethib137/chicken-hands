@@ -111,6 +111,18 @@ class ViewRecipe extends Component {
 			fontSize: baseFontSize_ * 2 + 'px'
 		};
 
+		const readyToListen = this.state.readyToListen_;
+
+		const listeningStateText = readyToListen ? 'Ready to listen' : 'Processing command...';
+		const listeningStateClass = readyToListen ? 'ready' : 'not-ready';
+
+		const listeningStateClassNames = getCN('listening-state',
+			{
+				ready: readyToListen,
+				['not-ready']: !readyToListen
+			}
+		);
+
 		return (
 			<div class="view-recipe-container">
 				{!recipe &&
@@ -152,7 +164,7 @@ class ViewRecipe extends Component {
 							<p class="current-step"  style={maximized_ ? stepStyle : ''}>{recipe.steps[recipe.currentStep]}</p>
 						</div>
 
-						<div class="listening-state">{this.state.readyToListen_ ? 'Ready to listen' : 'Processing command...'}</div>
+						<div class={listeningStateClassNames}>{listeningStateText}</div>
 					</div>
 				}
 			</div>
