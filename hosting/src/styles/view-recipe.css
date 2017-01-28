@@ -16,8 +16,10 @@
 	}
 
 	.recipe-viewer.maximized {
+		background-color: #FFF;
 		bottom: 0;
 		left: 0;
+		margin: 0;
 		position: fixed;
 		right: 0;
 		top: 0;
@@ -43,7 +45,7 @@
 			display: none;
 		}
 
-		.view-header {
+		.panel-heading {
 			display: none;
 		}
 	}

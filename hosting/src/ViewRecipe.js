@@ -90,10 +90,10 @@ class ViewRecipe extends Component {
 									<span class="glyphicon glyphicon-zoom-in"></span>
 								</a>
 							</div>
+
 							<div class="description">
 								<p>{recipe.description}</p>
 							</div>
-
 						</div>
 
 						<div class="panel-body">
