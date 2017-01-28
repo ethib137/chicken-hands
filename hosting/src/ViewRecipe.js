@@ -16,7 +16,8 @@ class ViewRecipe extends Component {
 			this,
 			'handleNext',
 			'handlePrev',
-			'toggleMaximized'
+			'toggleMaximized',
+			'toggleShowIngredients'
 		);
 
 		this.voiceControl_ = new VoiceControl(['chicken hands', 'chicken hand', 'chicken ands', 'chicken and']);
@@ -62,10 +63,16 @@ class ViewRecipe extends Component {
 		this.state.maximized_ = !this.state.maximized_;
 	}
 
+	toggleShowIngredients() {
+		this.state.showIngredients_ = !this.state.showIngredients_;
+	}
+
 	render() {
 		const recipe = this.props.recipe.toJS();
 
 		const stepCount = recipe.steps.length;
+
+		const ingredientsCount = recipe.ingredients.length;
 
 		const {currentStep} = recipe;
 
@@ -114,6 +121,25 @@ class ViewRecipe extends Component {
 							</div>
 
 							<p class="current-step">{recipe.steps[recipe.currentStep]}</p>
+
+						</div>
+
+						<div class="ingredient-list panel-footer">
+							{!!ingredientsCount &&
+								<a href="javascript:;" onClick={this.toggleShowIngredients}>
+									{this.state.showIngredients_ ? 'Hide Ingredients' : 'Show Ingredients'}
+								</a>
+							}
+
+							{!!ingredientsCount && this.state.showIngredients_ &&
+								<ul>
+									{recipe.ingredients.map(
+										({value = "0", unit, name}) => <li>
+											{`${value} ${name}`}
+										</li>
+									)}
+								</ul>
+							}
 						</div>
 
 						<div class="listening-state">{this.state.readyToListen_ ? 'Ready to listen' : 'Processing command...'}</div>
@@ -133,6 +159,7 @@ ViewRecipe.PROPS = {
 
 ViewRecipe.STATE = {
 	readyToListen_:  Config.bool().value(true),
+	showIngredients_: Config.bool().value(false),
 	maximized_: Config.bool().value(false)
 }
 
