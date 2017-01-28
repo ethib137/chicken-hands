@@ -29,7 +29,7 @@
 		}
 
 		.current-step {
-			font-size: 120px;
+			font-size: calc(4vw + 4vh);
 			text-align: center;
 		}
 
