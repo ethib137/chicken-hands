@@ -37,6 +37,9 @@ class ViewRecipe extends Component {
 		else if (action === ACTIONS.INCREASE_FONT) {
 			this.increaseFontSize();
 		}
+		else if (action === ACTIONS.INGREDIENT) {
+			this.toggleShowIngredients();
+		}
 		else if (action === ACTIONS.MAXIMIZE) {
 			this.toggleMaximized(true);
 		}
