@@ -19,7 +19,7 @@ class ViewRecipe extends Component {
 			'toggleMaximized'
 		);
 
-		this.voiceControl_ = new VoiceControl(['chicken hands', 'chicken hand']);
+		this.voiceControl_ = new VoiceControl(['chicken hands', 'chicken hand', 'chicken ands', 'chicken and']);
 
 		this.voiceControl_.onlisteningchange = this.handleOnListeningChange.bind(this);
 		this.voiceControl_.oncommand = this.handleOnCommand.bind(this);

@@ -17,7 +17,7 @@ function getNewSpeechRecognition(onResultFunction) {
 export default class VoiceControl {
 
 	constructor(commandPrefixArray) {
-		this.commandPrefixArray = commandPrefixArray.map(prefix => prefix.toUpperCase()) || ['CHICKEN HANDS', 'CHICKEN HAND'];
+		this.commandPrefixArray = commandPrefixArray.map(prefix => prefix.toUpperCase()) || ['CHICKEN HANDS', 'CHICKEN HAND', 'CHICKEN ANDS', 'CHICKEN AND'];
 
 		this.onlisteningchange = event => event;
 		this.oncommand = event => event;
