@@ -1,8 +1,5 @@
 import {intersection} from 'lodash';
 
-const READ = 'READ';
-const SET = 'SET';
-
 const COMMANDS_NAVIGATION_BACK = ['BACK', 'FIRST', 'PREVIOUS'];
 const COMMANDS_NAVIGATION_FORWARD = ['LAST', 'NEXT', 'FORWARD'];
 
@@ -25,10 +22,15 @@ const COMMANDS_WITH_ARGUMENTS = [READ, SET, 'SHOW', 'START'];
 
 const NAVIGATE_BACK = 'NAVIGATE_BACK';
 const NAVIGATE_FORWARD = 'NAVIGATE_FORWARD';
+const NO_ACTION = 'NO_ACTION'
+const READ = 'READ';
+const SET = 'SET';
 
 export const ACTIONS = {
 	NAVIGATE_BACK,
-	NAVIGATE_FORWARD
+	NAVIGATE_FORWARD,
+	NO_ACTION,
+	READ
 }
 
 function isValidCommand(commandString) {
@@ -40,15 +42,12 @@ function arrayContainsElements(arr1, arr2) {
 }
 
 export function processCommand(commandString) {
-	if (!isValidCommand(commandString)) {
-		return console.log('No valid commands found');
-	}
-
 	let commandsArray = commandString.split(' ');
 
-	let commandObject = {};
-
-	commandObject.data = {};
+	let commandObject = {
+		action: ACTIONS.NO_ACTION,
+		data: {}
+	};
 
 	if (arrayContainsElements(commandsArray, COMMANDS_NAVIGATION_BACK)) {
 		commandObject.action = ACTIONS.NAVIGATE_BACK;
@@ -56,6 +55,10 @@ export function processCommand(commandString) {
 
 	else if (arrayContainsElements(commandsArray, COMMANDS_NAVIGATION_FORWARD)) {
 		commandObject.action = ACTIONS.NAVIGATE_FORWARD;
+	}
+
+	else if (commandsArray.includes(READ)) {
+		commandObject.action = ACTIONS.READ;
 	}
 
 	else if (arrayContainsElements(commandsArray, COMMANDS_TIMER)) {
