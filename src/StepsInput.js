@@ -73,7 +73,7 @@ class StepsInput extends Component {
 	onStepChange_({index, value}) {
 		const steps = cloneDeep(this.state.steps_);
 
-		steps[index][type] = value;
+		steps[index] = value;
 
 		this.state.steps_ = steps;
 
@@ -91,7 +91,7 @@ class StepsInput extends Component {
 
 				{
 					steps_.map(
-						(step, i) => <Step index={i} key={step} onChange={this.onStepChange_} value={step} />
+						(step, i) => <Step index={i} key={i} onChange={this.onStepChange_} value={step} />
 					)
 				}
 

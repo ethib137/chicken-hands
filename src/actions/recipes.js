@@ -6,7 +6,10 @@ export const ACTION_TYPES = {
 
 export function addRecipe(recipe) {
 	return {
-		recipe,
+		recipe: {
+			...recipe,
+			currentStep: 0
+		},
 		type: ACTION_TYPES.ADD
 	};
 }

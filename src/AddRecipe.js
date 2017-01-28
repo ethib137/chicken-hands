@@ -38,6 +38,8 @@ class AddRecipe extends Component {
 				title: title_
 			}
 		);
+
+		window.location.hash = '';
 	}
 
 	onDescriptionChange_({target}) {

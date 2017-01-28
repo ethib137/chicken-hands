@@ -127,7 +127,7 @@ class IngredientsInput extends Component {
 
 				{
 					ingredients_.map(
-						(ingredient, i) => <Ingredient {...ingredient} index={i} key={ingredient.name} onChange={this.onIngredientChange_} />
+						(ingredient, i) => <Ingredient {...ingredient} index={i} key={i} onChange={this.onIngredientChange_} />
 					)
 				}
 
