@@ -154,6 +154,76 @@ export default [
 			'Place chicken pieces in a lightly greased 9x13 inch baking dish. Brush chicken with the sauce. Turn pieces over, and brush again.',
 			'Bake in the preheated oven for 30 minutes. Turn pieces over, and bake for another 30 minutes, until no longer pink and juices run clear. Brush with sauce every 10 minutes during cooking.'
 		]
+	},
+	{
+		title: 'Chef John\'s Hot Sloppy Joe Dip',
+		description: 'For me this checks all the boxes for a hot party dip. It\'s relatively cheap and easy to make, but maybe more importantly, it\'s great hot, warm, or room temp. And it\'s also incredibly versatile.',
+		ingredients: [
+			{
+				value: '2',
+				unit: 'pounds',
+				name: 'extra lean ground beef'
+			},
+			{	value: '2',
+				unit: '',
+				name: 'green bell peppers'
+			},
+			{	value: '1',
+				unit: '',
+				name: 'onion, diced'
+			},
+			{	value: '4',
+				unit: 'cloves',
+				name: 'garlic'
+			},
+			{	value: '3',
+				unit: 'tbsp',
+				name: 'all-purpose flour'
+			},
+			{	value: '2',
+				unit: 'tbsp',
+				name: 'brown sugar'
+			},
+			{	value: '2',
+				unit: 'tsp',
+				name: 'kosher salt, or to taste'
+			},
+			{	value: '1',
+				unit: 'tsp',
+				name: 'ground black pepper'
+			},
+			{	value: '',
+				unit: '',
+				name: 'cayenne pepper, to taste'
+			},
+			{	value: '2',
+				unit: 'cups',
+				name: 'chicken broth'
+			},
+			{	value: '1',
+				unit: 'cup',
+				name: 'ketchup'
+			},
+			{	value: '1',
+				unit: 'tbsp',
+				name: 'Dijon mustard'
+			},
+			{	value: '1',
+				unit: 'tsp',
+				name: 'Worcestershire sauce'
+			},
+			{	value: '1',
+				unit: 'cup',
+				name: 'shredded cheese, divided'
+			}
+		],
+		steps: [
+			'Place ground beef, bell pepper, onion, garlic, flour, brown sugar, salt, pepper, and cayenne pepper in a heavy pot.',
+			'Place pot over medium-high heat. Break up and stir mixture as it heats. Cook and stir until most of the moisture has evaporated and mixture is crumbly and begins to brown, about 15 minutes. Stir in chicken broth, ketchup, mustard, and Worcestershire sauce. Mix well and bring mixture to a simmer. Reduce heat to medium. Cook, stirring occasionally, until mixture is thick, about 45 minutes.',
+			'Set oven rack about 6 inches from the heat source and preheat the oven\'s broiler.',
+			'Transfer mixture to oven-proof sauce pan. Top with 1/2 of the shredded cheese. Poke cheese down into the dip with a fork, stirring lightly. Top with remaining cheese.',
+			'Place pan under broiler; broil until cheese is browned, and mixture is hot and bubbly, about 5 minutes.'
+		]
 	}
 
 ];
